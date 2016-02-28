@@ -1,0 +1,78 @@
+This program NEEDS to:
+    Simulate:
+	- 30 hosts
+	- 4 busses
+	*Over:
+	    - 1000 Time intervals
+	    - 100 Itterations
+    Printout:
+	- Itteration Probability
+	*Per-Itteration:
+	    - Sucessessfull Sends Per Buss
+	    - Collisions Per Buss
+	    - Total Successful Sends
+	    - Total Collisions
+
+Phase 1 - Base Functions
+
+NOT doing object oriented coding due to wasted overhead and simplicity of the code
+
+    * Host (Computer) ()
+X	- Constructor Requires: 
+	    Probability (0-100)
+	    Number of busses
+X	- Accepts:
+	    NONE
+X	- Returns:
+	    Bus packet sent on (-1 if no packet sent)
+X	- Action
+	    Based on probability, decides if a packet is sent
+	    Determines what bus packet is sent on (even chance for each bus)
+	    Return bus # if sent, -1 if not sent
+
+    * summaryWriter class (int, int[][], file OUTPUT)
+	- Accepts: 
+	    2 int's, 1 file
+	    { PROBABILITY, RAWDATA, OUTPUTFILE}
+	- Returns:
+	    NONE
+	- Actions:
+	    Writes out data as shown in Phase 4.1
+		X	COLISSIONS  EMPTY_SLOTS GOOD_SENDS 1 Used 2 Used 3 Used 4 Used
+	    PROBABILITY	    #		#	    #	    #	    #	    #	  #
+	    \n
+
+Phase 2 - Main program skeleton
+    - Construct Host (use static p=.5, b=4 for testing)
+	Output to stdOut for debugging
+    - Pass summaryWriter some test data to write
+    - Close File
+    - Destruct classes
+
+Phase 2.1 - Host loop
+    - Loop through host calls 5 times (to test)
+
+Phase 3 - Time loop
+    - Add Time loop around Host loop
+	Loop through 25 time increments
+
+Phase 3.1 - Colision and Open Bus detection
+    - Keep track of used busses
+	Mark colision if two hosts try to send on same bus
+	Mark open if bus is un-used in the time loop
+
+Phase 4 - Write out summary data at end of time loop
+    - Keep track of collissions and empty slots in loop
+    - Keep track of 1/4 .. 4/4 utilization of busses
+    - Write out summary data at completion of time loop
+    - Zero out variables
+
+Phase 5 - Add probability loop
+    - Add loop before creation of hosts for probability incrementing
+    - Increment 0 to 1 by 0.1
+
+Phase 6 - Full Time
+    - Increase time increment limit to 1000
+
+Phase 6.1 - Full Probability
+    - Change probability increment from 0.1 to 0.01
